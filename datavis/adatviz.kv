@@ -1,0 +1,865 @@
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+WindowManager:
+    transition: NoTransition()
+    KorOraWindow:
+    LetBunWindow:
+    CanvasFolytWindow:
+    
+<KorOraWindow>:
+    name: "korora"
+    #on_enter: self.reset_but()
+    KorOra:
+
+<LetBunWindow>:
+    name: "letbun"           
+    on_enter: self.reset_but()  
+    LetBun:
+    
+<CanvasFolytWindow>:
+    name: "folyt"
+    #on_enter: self.reset_but()
+    Folyt:
+        
+<KorOra>:
+    id: krora
+    GridLayout:
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.15
+        cols: 4
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: a_t_k
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Age-Time"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "korora"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: l_b_k
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Arrest-Type"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "letbun"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: a_t_p_k
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Age-Time Pro"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "folyt"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.1, self.parent.height*0.8
+            ToggleButton:
+                size_hint: None, None
+                size: self.parent.width*0.4, self.parent.height*0.6
+                background_normal: 'hulp_normal.png'
+                background_down: 'hulp_down.png'
+                on_state: root.infopanel(self)
+                
+    Image:            
+        size: self.texture_size
+        id: img
+        source: 'kor_ora/kor_ora0.png'
+        
+    GridLayout:
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.2
+        cols: 2
+        GridLayout:
+            cols: 3
+            size_hint: None, None
+            size: self.parent.width*0.1, self.parent.height
+            AnchorLayout:
+                anchor_x: "right"
+                anchor_y: "center"
+                size_hint: None, None
+                size: self.parent.width*0.33, self.parent.height
+                Button: # back
+                    id: b_k
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    background_normal: 'backward.png'
+                    background_down: 'backward.png'
+                    background_disabled_normal: 'backward.png'
+                    on_press: root.back_speed()
+            AnchorLayout:
+                size_hint: None, None
+                size: self.parent.width*0.34, self.parent.height
+                anchor_x: "center"
+                anchor_y: "center"
+                ToggleButton: #startstop
+                    id: toggle_ko
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    #id: butt
+                    text: ""
+                    background_normal: 'start.png'
+                    background_down: 'stop.png'
+                    background_disabled_normal: 'start.png'
+                    on_state: root.start_stop(self)
+            AnchorLayout:
+                size_hint: None, None
+                size: self.parent.width*0.33, self.parent.height
+                anchor_x: "left"
+                anchor_y: "center"
+                Button: #forward
+                    id: f_k
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    background_normal: 'forward.png'
+                    background_down: 'forward.png'
+                    background_disabled_normal: 'forward.png'
+                    on_press: root.forw_speed()
+        Slider:
+            size_hint: None, None
+            size: self.parent.width*0.9, self.parent.height
+            id: slid
+            min: 0
+            max: 71
+            cursor_image: "./knob.png"
+            cursor_disabled_image: "./knob.png"
+            on_value: root.on_slider_value(self) 
+        
+        
+<LetBun>:
+    id: let_bun
+    GridLayout:
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.15
+        cols: 4
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: a_t_l
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Age-Time"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "korora"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: l_b_l
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Arrest-Type"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "letbun"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: a_t_p_l
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Age-Time Pro"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "folyt"
+                
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.1, self.parent.height*0.8
+            ToggleButton:
+                size_hint: None, None
+                size: self.parent.width*0.4, self.parent.height*0.6
+                background_normal: 'hulp_normal.png'
+                background_down: 'hulp_down.png'
+                on_state: root.infopanel(self)
+                
+    GridLayout: #*középső függőlegesen
+        cols: 2
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.65
+        GridLayout: #Bal oldali középen
+            cols: 1
+            size_hint: None, None
+            size: self.parent.width*0.4, self.parent.height
+            BoxLayout: # bal oldalon felső hely
+                size_hint: None, None
+                size: self.parent.width, self.parent.height*0.1
+            GridLayout: # Gomb tartó
+                cols: 5
+                size_hint: None, None
+                size: self.parent.width, self.parent.height*0.4
+                BoxLayout: # Bal hézag a gomboknál
+                    size_hint: None, None
+                    size: self.parent.width*0.15, self.parent.height
+                GridLayout: #két gomb
+                    cols: 1
+                    size_hint: None, None
+                    size: self.parent.width*0.2, self.parent.height
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "bottom"
+                        ToggleButton:
+                            id: arr 
+                            size_hint: None, None
+                            size: 60, 60
+                            text: "A"
+                            font_name: 'trebuc.ttf'
+                            font_size: 20
+                            color: [.75, .24, .09, 1]
+                            background_normal: 'toggle_button_enabled.png'
+                            background_disabled_normal: 'toggle_button_disabled.png'
+                            background_down: 'toggle_button_down.png'
+                            on_state: root.valasztas_arr(self)
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "top"
+                        ToggleButton:
+                            id: narr
+                            size_hint: None, None
+                            size: 60, 60
+                            text: "N A"
+                            font_name: 'trebuc.ttf'
+                            font_size: 20
+                            color: [.75, .24, .09, 1]
+                            background_normal: 'toggle_button_enabled.png'
+                            background_disabled_normal: 'toggle_button_disabled.png'
+                            background_down: 'toggle_button_down.png'
+                            on_state: root.valasztas_arr(self)
+                BoxLayout: #középső hézag a gomboknál
+                    size_hint: None, None
+                    size: self.parent.width*0.1, self.parent.height
+                GridLayout: # öt gomb
+                    cols: 3
+                    size_hint: None, None
+                    size: self.parent.width*0.4, self.parent.height
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "bottom"
+                        ToggleButton:
+                            id: sp
+                            size_hint: None, None
+                            size: 60, 60
+                            text: "S"
+                            font_name: 'trebuc.ttf'
+                            font_size: 20
+                            color: [.75, .24, .09, 1]
+                            background_normal: 'toggle_button_enabled.png'
+                            background_disabled_normal: 'toggle_button_disabled.png'
+                            background_down: 'toggle_button_down.png'
+                            on_state: root.valasztas_viol(self)
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "bottom"
+                        ToggleButton:
+                            id: eq
+                            size_hint: None, None
+                            size: 60, 60
+                            text: "E" 
+                            font_name: 'trebuc.ttf'
+                            font_size: 20
+                            color: [.75, .24, .09, 1]
+                            background_normal: 'toggle_button_enabled.png'
+                            background_disabled_normal: 'toggle_button_disabled.png'
+                            background_down: 'toggle_button_down.png'
+                            on_state: root.valasztas_viol(self)
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "bottom"
+                        ToggleButton:
+                            id: mo
+                            size_hint: None, None
+                            size: 60, 60
+                            text: "M"
+                            font_name: 'trebuc.ttf'
+                            font_size: 20
+                            color: [.75, .24, .09, 1]
+                            background_normal: 'toggle_button_enabled.png'
+                            background_disabled_normal: 'toggle_button_disabled.png'
+                            background_down: 'toggle_button_down.png'
+                            on_state: root.valasztas_viol(self)
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "top"
+                        ToggleButton:
+                            id: pl
+                            size_hint: None, None
+                            size: 60, 60
+                            text: "P"
+                            font_name: 'trebuc.ttf'
+                            font_size: 20
+                            color: [.75, .24, .09, 1]
+                            background_normal: 'toggle_button_enabled.png'
+                            background_disabled_normal: 'toggle_button_disabled.png'
+                            background_down: 'toggle_button_down.png'
+                            on_state: root.valasztas_viol(self)
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "top"
+                        ToggleButton:
+                            id: ot
+                            size_hint: None, None
+                            size: 60, 60
+                            text: "O"
+                            font_name: 'trebuc.ttf'
+                            font_size: 20
+                            color: [.75, .24, .09, 1]
+                            background_normal: 'toggle_button_enabled.png'
+                            background_disabled_normal: 'toggle_button_disabled.png'
+                            background_down: 'toggle_button_down.png'
+                            on_state: root.valasztas_viol(self)
+                BoxLayout: # jobb oldali hézag a gomboknál
+                    size_hint: None, None
+                    size: self.parent.width*0.15, self.parent.height
+            GridLayout: #grafikon és label tartó
+                cols:1
+                size_hint: None, None
+                size: self.parent.width, self.parent.height*0.5
+                GridLayout: #grafikon és y label
+                    cols: 2
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.9
+                    GridLayout:#y label
+                        cols: 1 
+                        size_hint: None, None
+                        size: self.parent.width*0.1, self.parent.height
+                        AnchorLayout
+                            size_hint: None, None
+                            size: self.parent.width, self.parent.height*0.1
+                            anchor_x: "center"
+                            anchor_y: "bottom"
+                            Label:
+                                id: max
+                                text: root.y_max
+                                font_name: 'trebuc.ttf'
+                                font_size: 20
+                                bold: True
+                                color: [.75, .24, .09, 1]
+                        AnchorLayout
+                            size_hint: None, None
+                            size: self.parent.width, self.parent.height*0.1
+                            anchor_x: "center"
+                            anchor_y: "top"
+                            Label:
+                                id: cas
+                                text: ""
+                                font_name: 'trebuc.ttf'
+                                font_size: 20
+                                bold: True
+                                color: [.75, .24, .09, 1]
+                        GridLayout:
+                            cols: 1
+                            size_hint: None, None
+                            size: self.parent.width, self.parent.height*0.8
+                            
+                    RelativeLayout: # grafikon
+                        id: graf            
+                        size_hint: None, None
+                        size: self.parent.width*0.9, self.parent.height
+                GridLayout: # x label tarto
+                    cols:2 
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.1
+                    BoxLayout:
+                        size_hint: None, None
+                        size: self.parent.width*0.1, self.parent.height
+                    GridLayout:# x label
+                        cols: 2 
+                        size_hint: None, None
+                        size: self.parent.width*0.9, self.parent.height
+                        AnchorLayout:
+                            size_hint: None, None
+                            size: self.parent.width, self.parent.height
+                            anchor_x: "center"
+                            anchor_y: "center"
+                            Label:
+                                id: mon
+                                size_hint: None, None
+                                size: self.parent.width*0.5, self.parent.height
+                                text: root.month
+                                font_name: 'trebuc.ttf'
+                                font_size: 20
+                                color: [.75, .24, .09, 1]
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            Image:        
+                size_hint: None, None    
+                size: self.parent.width*0.8, self.parent.height*0.8
+                id: img_lb
+                source: 'let_bun/let_bun0.png'
+        
+        
+    GridLayout:
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.2
+        cols: 2
+        GridLayout:
+            cols: 3
+            size_hint: None, None
+            size: self.parent.width*0.1, self.parent.height
+            AnchorLayout:
+                anchor_x: "right"
+                anchor_y: "center"
+                size_hint: None, None
+                size: self.parent.width*0.33, self.parent.height
+                Button: # back
+                    id: b_l
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    background_normal: 'backward.png'
+                    background_down: 'backward.png'
+                    background_disabled_normal: 'backward.png'
+                    on_press: root.back_speed()
+            AnchorLayout:
+                size_hint: None, None
+                size: self.parent.width*0.34, self.parent.height
+                anchor_x: "center"
+                anchor_y: "center"
+                ToggleButton: #startstop
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    id: butt_lb
+                    text: ""
+                    background_normal: 'start.png'
+                    background_down: 'stop.png'
+                    background_disabled_normal: 'start.png'
+                    on_state: root.start_stop(self)
+            AnchorLayout:
+                size_hint: None, None
+                size: self.parent.width*0.33, self.parent.height
+                anchor_x: "left"
+                anchor_y: "center"
+                Button: #forward
+                    id: f_l
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    background_normal: 'forward.png'
+                    background_down: 'forward.png'
+                    background_disabled_normal: 'forward.png'
+                    on_press: root.forw_speed()
+        Slider:
+            size_hint: None, None
+            size: self.parent.width*0.9, self.parent.height
+            id: slid_lb
+            min: 0
+            cursor_image: "./knob.png"
+            cursor_disabled_image: "./knob.png"
+            max: 71
+            on_value: root.on_slider_value(self)
+        
+        
+<Folyt>:
+    id: folyt
+    GridLayout:
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.15
+        cols: 4
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: a_t_f
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Age-Time"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "korora"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: l_b_f
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Arrest-Type"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "letbun"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.3, self.parent.height*0.8
+            Button:
+                id: a_t_p_f
+                size_hint: None, None
+                size: self.parent.width*0.8, self.parent.height*0.8
+                text: "Age-Time Pro"
+                font_name: 'trebuc.ttf'
+                font_size: 40
+                color: [.75, .24, .09, 1]
+                background_normal: 'button_normal.png'
+                background_down: 'button_down.png'
+                background_disabled_normal: 'button_normal.png'
+                on_press: root.windowchangecancel()
+                on_release: app.root.current = "folyt"
+                
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: None, None
+            size: self.parent.width*0.1, self.parent.height*0.8
+            ToggleButton:
+                size_hint: None, None
+                size: self.parent.width*0.4, self.parent.height*0.6
+                background_normal: 'hulp_normal.png'
+                background_down: 'hulp_down.png'
+                on_state: root.infopanel(self)
+                
+    GridLayout:
+        cols: 3
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.65
+        
+        AnchorLayout:
+            size_hint: None, None
+            size: self.parent.width*0.2, self.parent.height
+            anchor_x: "right"
+            anchor_y: "center"
+            GridLayout: #interpolácio tarto
+                cols: 1
+                AnchorLayout:
+                    anchor_x: "center"
+                    anchor_y: "bottom"
+                    Button:
+                        id: fel
+                        background_normal: 'up.png'
+                        background_down: 'up.png'
+                        background_disabled_normal: "up.png"
+                        size_hint: None, None
+                        size: self.parent.width*0.3, self.parent.height*0.5
+                        on_press: root.inter_plus()
+                AnchorLayout:
+                    anchor_x: "center"
+                    anchor_y: "center"
+                    Label:
+                        id: tav_d
+                        text: "0"
+                        color: [.75, .24, .09, 1]
+                        font_name: 'trebuc.ttf'
+                        font_size: 100
+                AnchorLayout:
+                    anchor_x: "center"
+                    anchor_y: "top"
+                    Button:       
+                        id: le   
+                        background_normal: 'down.png'
+                        background_down: 'down.png'
+                        background_disabled_normal: 'down.png'
+                        size_hint: None, None
+                        size: self.parent.width*0.3, self.parent.height*0.5
+                        on_press: root.inter_minus()
+                    
+        GridLayout: #y label korok
+            cols: 2
+            size_hint: None, None
+            size: self.parent.width*0.2, self.parent.height
+            AnchorLayout:
+                anchor_x: "left"
+                anchor_y: "bottom"
+                size_hint: None, None
+                size: self.parent.width, self.parent.height*0.8
+                GridLayout:
+                    cols: 1
+                    size_hint: None, None
+                    size: self.parent.width*0.9, self.parent.height*0.9
+                    AnchorLayout:
+                        anchor_x: "right"
+                        anchor_y: "center"
+                        size_hint: None, None
+                        size: self.parent.width, self.parent.height*0.25
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.5, self.parent.height
+                            text: "GenX"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 40
+                    AnchorLayout:
+                        anchor_x: "right"
+                        anchor_y: "center"
+                        size_hint: None, None
+                        size: self.parent.width, self.parent.height*0.25
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.5, self.parent.height
+                            text: "Mill"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 40
+                    AnchorLayout:
+                        anchor_x: "right"
+                        anchor_y: "center"
+                        size_hint: None, None
+                        size: self.parent.width, self.parent.height*0.25
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.5, self.parent.height
+                            text: "GenY"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 40
+                    AnchorLayout:
+                        anchor_x: "right"
+                        anchor_y: "center"
+                        size_hint: None, None
+                        size: self.parent.width, self.parent.height*0.25
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.5, self.parent.height
+                            text: "Boomer"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 40
+                
+        GridLayout: 
+            cols: 1    
+            size_hint: None, None
+            size: self.parent.width*0.6, self.parent.height
+            AnchorLayout: #♠ vászon tartó
+                id: ancsor
+                anchor_x: "left"
+                anchor_y: "bottom"
+                size_hint: None, None
+                size: self.parent.width, self.parent.height*0.8
+                RelativeLayout:
+                    id: vaszon
+                    size_hint: None, None
+                    size: self.parent.width*0.9, self.parent.height*0.9
+            AnchorLayout:
+                anchor_x: "left"
+                anchor_y: "bottom"
+                size_hint: None, None
+                size: self.parent.width, self.parent.height*0.2
+                GridLayout: #idő
+                    cols: 8
+                    size_hint: None, None
+                    size: self.parent.width*0.9, self.parent.height
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "0:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "3:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "6:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "9:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "12:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "15:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "18:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    AnchorLayout:
+                        anchor_x: "left"
+                        anchor_y: "top"
+                        size_hint: None, None
+                        size: self.parent.width*0.125, self.parent.height
+                        Label:
+                            size_hint: None, None
+                            size: self.parent.width*0.4, self.parent.height*0.4
+                            text: "21:00"
+                            color: [0, 0, 0, 1]
+                            font_name: 'trebuc.ttf'
+                            font_size: 30
+                    
+        
+    GridLayout:
+        size_hint: None, None
+        size: self.parent.width, self.parent.height*0.2
+        cols: 2
+        GridLayout:
+            cols: 3
+            size_hint: None, None
+            size: self.parent.width*0.1, self.parent.height
+            AnchorLayout:
+                anchor_x: "right"
+                anchor_y: "center"
+                size_hint: None, None
+                size: self.parent.width*0.33, self.parent.height
+                Button: # back
+                    id: b_f
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    background_normal: 'backward.png'
+                    background_down: 'backward.png'
+                    background_disabled_normal: 'backward.png'
+                    on_press: root.back_speed()
+            AnchorLayout:
+                size_hint: None, None
+                size: self.parent.width*0.34, self.parent.height
+                anchor_x: "center"
+                anchor_y: "center"
+                ToggleButton: #startstop
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    id: butt_f
+                    text: ""
+                    background_normal: 'start.png'
+                    background_down: 'stop.png'
+                    background_disabled_normal :"start.png"
+                    on_state: root.start_stop(self)
+            AnchorLayout:
+                size_hint: None, None
+                size: self.parent.width*0.33, self.parent.height
+                anchor_x: "left"
+                anchor_y: "center"
+                Button: #forward
+                    id: f_f
+                    size_hint: None, None
+                    size: self.parent.width, self.parent.height*0.25
+                    background_normal: 'forward.png'
+                    background_down: 'forward.png'
+                    background_disabled_normal: "forward.png"
+                    on_press: root.forw_speed()   
+        Slider:
+            size_hint: None, None
+            size: self.parent.width*0.9, self.parent.height
+            id: slid_f
+            cursor_image: "./knob.png"
+            cursor_disabled_image: "./knob.png"
+            min: 0
+            max: 71
+            on_value: root.on_slider_value_f()
+            
