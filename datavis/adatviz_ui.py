@@ -37,8 +37,8 @@ class KorOraWindow(Screen):
     def reset_but(self):
         for i in self.children:
             for j in i.ids:
-                if j == 'butt':
-                    i.ids.butt.state = 'normal'
+                if j == 'toggle_ko':
+                    i.ids.toggle_ko.state = 'normal'
     info_layout = None
 
 class LetBunWindow(Screen):
@@ -476,7 +476,7 @@ class KorOra(GridLayout):
     def windowchangecancel(self):
         if len(Clock.get_events()) == 4:
             self.mozi_interval.cancel()
-            self.ids.butt.state = "normal"
+            self.ids.toggle_ko.state = "normal"
             self.speed = 1
         else:
             pass
