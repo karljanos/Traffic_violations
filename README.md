@@ -8,3 +8,5 @@ To run this application:
 - Use *python adatviz_ui.py* command.
 
 By pressing the button at the top right corner with the question mark, you can get additional information about the widgets found on the current page.  Press it again to hide the information panel.  
+
+In the *traffic.ipynb* you can find the code I extracted the data with, the *traffic.html* is the same file saved in an html format.
