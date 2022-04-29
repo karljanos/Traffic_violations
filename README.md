@@ -1,5 +1,5 @@
 # Description
-This is an introductory data visualization project, based on a kaggle traffic violation dataset (https://www.kaggle.com/datasets/shubamsumbria/traffic-violations-dataset). The project is made in kivy which is a cross platform open source python framework for NUI developement and every button is carefully handcrafted in Paint3D. The final outcome is a small application, showing heatmaps with some additional features.
+This is an introductory data visualization project, based on a kaggle traffic violation dataset (https://www.kaggle.com/datasets/shubamsumbria/traffic-violations-dataset). The project is made in kivy which is a cross platform open source python framework for NUI developement and every button is carefully handcrafted in Paint3D. The final outcome is a small application, showing heatmaps with some additional features. For your own good please don't change the size of the window because it's not designed that way.
 
 
 To run this application:
