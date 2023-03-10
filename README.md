@@ -5,7 +5,7 @@ This is an introductory data visualization project, based on a kaggle traffic vi
 To run this application:
 - Download the *datavis* folder.
 - *cd* into the folder.
-- Use *python adatviz_ui.py* command. (Might need some missing dependencies.)
+- Use *python adatviz_ui.py* command. (Additional mdules are required)
 
 By pressing the button at the top right corner with the question mark, you can get additional information about the widgets found on the current page.  Press it again to hide the information panel.  
 
